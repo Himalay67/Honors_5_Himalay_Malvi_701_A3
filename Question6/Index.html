@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joke Generator</title>
+</head>
+<body>
+    <h2>Random Joke</h2>
+    <button onclick="getJoke()">Get Joke</button>
+
+    <p id="setup"></p>
+    <p id="punchline"></p>
+
+    <script>
+        function getJoke(){
+            // Calling our Express backend
+            fetch("/joke")
+            // Getting the response
+            .then(response => response.json())
+            // Receiving the data
+            .then(data => {
+                document.getElementById("setup").innerHTML = data.setup;
+                document.getElementById("punchline").innerHTML = data.punchline;
+            });
+        }
+    </script>
+</body>
+</html>

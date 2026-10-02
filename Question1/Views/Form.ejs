@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+</head>
+<body>
+    <h1>User Registration Form</h1>
+
+    <!-- Checks whether errors exist. -->
+    <% if (errors.length > 0){ %>
+        <h3>Errors:</h3>
+        <ul>
+            <!-- loops through each error. -->
+            <% errors.forEach(function(error){ %>
+                <!-- displays the error. -->
+                <li><%= error %></li>
+            <% }); %>
+        </ul>
+    <% } %>
+
+    <form action="/register" method="POST" enctype="multipart/form-data">
+        <label>Username:</label>
+        <!-- <%= old.username || '' %>:- displays the previous username after validation fails. -->
+        <input type="text" name="username" value="<%= old.username || '' %>" />
+        <br /><br />
+
+        <label>Passowrd:</label>
+        <input type="password" name="password" />
+        <br /><br />
+
+        <label>Confirm Password:</label>
+        <input type="password" name="confirmPassword" />
+        <br /><br />
+
+        <label>Email:</label>
+        <input type="text" name="email" value="<%= old.email || '' %>" />
+        <br /><br />
+
+        <label>Gender:</label>
+        <!-- <%= old.gender == "Male" ? "checked" : "" %>:- If the previous gender was Male, add checked. -->
+        <input type="radio" name="gender" value="Male" <%= old.gender == "Male" ? "checked" : "" %> />Male 
+        <input type="radio" name="gender" value="Female" <%= old.gender == "Female" ? "checked" : "" %> />Female
+        <input type="radio" name="gender" value="Other" <%= old.gender == "Other" ? "checked" : "" %> />Other
+
+        <br /><br />
+
+        <label>Hobbies:</label>
+        old.hobbies.includes("Dancing"):- This checks whether Dancing was previously selected.
+        <input type="checkbox" name="hobbies" value="Dancing" <%= old.hobbies && old.hobbies.includes("Dancing") ? "checked" : "" %> />Dancing
+        <input type="checkbox" name="hobbies" value="Singing" <%= old.hobbies && old.hobbies.includes("Singing") ? "checked" : "" %> />Singing
+        <input type="checkbox" name="hobbies" value="Travelling" <%= old.hobbies && old.hobbies.includes("Travelling") ? "checked" : "" %> />Travelling
+        <input type="checkbox" name="hobbies" value="Sports" <%= old.hobbies && old.hobbies.includes("Sports") ? "checked" : "" %> />Sports
+        <br /><br />
+
+        <label>Profile Picture:</label>
+        <!-- accept tells the browser which type of files the user should select.
+        image/* Means: Accept any image file. -->
+        <!-- accept="image/*" is mainly a browser-side file selection restriction.
+        It does not replace your Multer validation. -->
+        <input type="file" name="profilePic" accept="image/*" />
+        <br /><br />
+
+        <label>Other Pictures:</label>
+        <input type="file" name="otherPics" multiple accept="image/*" />
+        <br /><br />
+
+        <input type="submit" value="Register">
+    </form>
+</body>
+</html>

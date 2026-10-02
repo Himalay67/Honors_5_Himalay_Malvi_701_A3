@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Details</title>
+</head>
+<body>
+    <h1>Registration Details</h1>
+
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Confirm Password</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Hobbies</th>
+            <th>Profile Picture</th>
+            <th></th>
+        </tr>
+
+        <!-- <% %>
+        Used for JavaScript code, but does not directly display anything. -->
+
+        <!-- It loops through every user. -->
+        <% users.forEach(function(user) { %>
+            <tr>
+
+                <!-- <%= %>
+                Used to display a value. -->
+
+                <td><%= user.data.username %></td>
+                <td><%= user.data.password %></td>
+                <td><%= user.data.confirmPassword %></td>
+                <td><%= user.data.email %></td>
+                <td><%= user.data.gender %></td>
+                <td>
+                    <!-- converts them to:
+                        Reading, Sports, Music -->
+                    <%= Array.isArray(user.data.hobbies)
+                        ? user.data.hobbies.join(", ")
+                        : user.data.hobbies %>
+                </td>
+                <td>
+                    <img
+                        src="/uploads/<%= user.profilePic.filename %>"
+                        width="150"
+                        />
+                    
+                    <br>
+                    
+                    <%= user.profilePic.originalname %> 
+
+                    <a href="/download/<%= user.profilePic.filename %>">
+                        Download
+                    </a>
+                </td>
+                <td>
+                    <% if (user.otherPics.length > 0) { %>
+                        <!-- If the user uploaded pictures, you loop through them:
+                            Then each image is displayed. -->
+                        <% user.otherPics.forEach(function(file) { %>
+                            <img
+                                src="/uploads/<%= file.filename %>"
+                                width="150"
+                                />
+            
+                            <br>
+            
+                            <%= file.originalname %>
+
+                            <a href="/download/<%= file.filename %>">
+                                Download
+                            </a>
+
+                            <br><br>
+                        <% }); %>
+                    <% } else { %>
+                        No other pictures uploaded.
+                    <% } %>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+
+    <br />
+
+    <a href="/">Register Another User</a>
+</body>
+</html>
+
+
+<!-- Display only one user -->
+<!-- \<!DOCTYPE html>
+
+\<html lang="en">
+
+\<head>
+
+    \<meta charset="UTF-8">
+
+    \<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    \<title>Registration Details\</title>
+
+\</head>
+
+\<body>
+
+    \<h1>Registration Details\</h1>
+
+    \<table *border*="1" cellpadding="10">
+
+        \<tr>
+
+            \<th>Username\</th>
+
+            \<th>Password\</th>
+
+            \<th>Confirm Password\</th>
+
+            \<th>Email\</th>
+
+            \<th>Gender\</th>
+
+            \<th>Hobbies\</th>
+
+            \<th>Profile Picture\</th>
+
+            \<th>\</th>
+
+        \</tr>
+
+        \<tr>
+
+            \<td>*<*%= data.username %>\</td>
+
+            \<td>*<*%= data.password %>\</td>
+
+            \<td>*<*%= data.confirmPassword %>\</td>
+
+            \<td>*<*%= data.email %>\</td>
+
+            \<td>*<*%= data.gender %>\</td>
+
+            \<td>
+
+                *<*%= Array.isArray(data.hobbies)
+
+                    ? data.hobbies.join(", ")
+
+                    : data.hobbies %>
+
+            \</td>
+
+            \<td>
+
+                \<img
+
+                    src="/uploads/*<*%= profilePic.filename %>"
+
+                    width="150"
+
+                    />
+
+                \<br>
+
+                *<*%= profilePic.originalname %> 
+
+                <a href="/download/<%= profilePic.filename %>">
+                    Download
+                </a>
+
+            \</td>
+
+            \<td>
+
+                *<*% if (otherPics.length > 0) { %>
+
+                    *<*% otherPics.forEach(function(file) { %>
+
+                        \<img
+
+                            src="/uploads/*<*%= file.filename %>"
+
+                            width="150"
+
+                            />
+
+                        \<br>
+
+                        *<*%= file.originalname %>
+
+                        <a href="/download/<%= file.filename %>">
+                            Download
+                        </a>
+
+
+                        \<br>\<br>
+
+                    *<*% }); %>
+
+                *<*% } else { %>
+
+                    No other pictures uploaded.
+
+                *<*% } %>
+
+            \</td>
+
+        \</tr>
+
+    \</table>
+
+    \<br />
+
+    \<a href="/">Register Another User\</a>
+
+\</body>
+
+\</html> -->
